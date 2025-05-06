@@ -20,6 +20,7 @@ const Cover = ({ img, title }) => {
                                 quasi. In deleniti eaque aut repudiandae et a id nisi.
                             </p>
                         </div>
+                        <h1>kemon acho</h1>
                     </div>
                 </div>
             </Parallax>
