@@ -3,6 +3,7 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-s
 import { AuthContext } from '../../Providers/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
+import Swal from 'sweetalert2';
 
 const Login = () => {
 
@@ -13,7 +14,7 @@ const Login = () => {
     const navigate = useNavigate()
     const location = useLocation()
 
-    const from = location.state?.form?.pathname || '/'
+    const from = location.state?.from?.pathname || '/'
 
     useEffect(() => {
         loadCaptchaEnginge(6);
@@ -29,6 +30,23 @@ const Login = () => {
             .then(result => {
                 const user = result.user
                 console.log(user);
+                Swal.fire({
+                    title: "you are login successfully",
+                    showClass: {
+                        popup: `
+                        animate__animated
+                        animate__fadeInUp
+                        animate__faster
+                      `
+                    },
+                    hideClass: {
+                        popup: `
+                        animate__animated
+                        animate__fadeOutDown
+                        animate__faster
+                      `
+                    }
+                });
                 navigate(from, { replace: true })
             })
     }
@@ -67,7 +85,7 @@ const Login = () => {
                                     <LoadCanvasTemplate />
                                 </label>
                                 <input onBlur={handleValidateCaptcha} type="text" name='captcha' className="input" placeholder="type the text above" />
-                                <input disabled={disabled} className='btn btn-primary' type="submit" value={'login'} />
+                                <input disabled={false} className='btn btn-primary' type="submit" value={'login'} />
                             </fieldset>
                         </div>
                         <p><small>new here? <Link to={'/signup'}>create an account</Link></small></p>
